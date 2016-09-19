@@ -38,7 +38,7 @@ public class Trainer {
 
 	public void plot(String label){
 		Plot plot = new Plot();
-		plot.plotFunction(10, -2, 3, -2, 2, new Function() {
+		plot.plotFunction(10, -3, 3, -3, 3, new Function() {
 			
 			@Override
 			public double calculateY(double x) {
@@ -57,19 +57,23 @@ public class Trainer {
 	
 	public int train(double rate, int max){
 		try {
+			double lastEqm = 10;
 			for (int i = 0; i < max; i++) {
 				double eqm = 0;
-				if(i % 10 == 0){
+				if(i % 30 == 0){
 					plot("Time: " + i);
 				}
 				for(Sample s : sample){
 					double e = Math.abs(adaline.train(s.input, s.output, rate));
+					System.out.println(e);
 					eqm += e * e;
 				}
+				eqm /= sample.size();
 				System.out.println(eqm);
-				if(eqm < 0.03){
+				if(Math.abs(lastEqm - eqm) < 0.00000000000000000001){
 					return i;
 				}
+				lastEqm = eqm;
 			}
 			return max;
 		} finally {
