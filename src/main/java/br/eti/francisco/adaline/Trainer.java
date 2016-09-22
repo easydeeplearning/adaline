@@ -57,11 +57,10 @@ public class Trainer {
 	
 	public int train(double rate, int max){
 		try {
-			double lastEqm = 10;
 			for (int i = 0; i < max; i++) {
 				double eqm = 0;
 				if(i % 30 == 0){
-					plot("Time: " + i);
+//					plot("Time: " + i);
 				}
 				for(Sample s : sample){
 					double e = Math.abs(adaline.train(s.input, s.output, rate));
@@ -70,10 +69,9 @@ public class Trainer {
 				}
 				eqm /= sample.size();
 				System.out.println(eqm);
-				if(Math.abs(lastEqm - eqm) < 0.00000000000000000001){
+				if(eqm < 0.000001){
 					return i;
 				}
-				lastEqm = eqm;
 			}
 			return max;
 		} finally {

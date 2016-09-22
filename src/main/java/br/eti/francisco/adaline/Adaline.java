@@ -27,12 +27,10 @@ public class Adaline {
 	public double train(double [] input, double output, double rate){
 		double v = getOutput(input);
 		double e = output - v;
-		if(Math.abs(e) > 0.1){
-			for (int i = 0; i < weight.length; i++) {
-				weight[i] = weight[i] + e * rate * input[i];
-			}
-			weightBias = weightBias + e * rate;
+		for (int i = 0; i < weight.length; i++) {
+			weight[i] = weight[i] + e * rate * input[i];
 		}
+		weightBias = weightBias + e * rate;
 		return e;
 	}
 
