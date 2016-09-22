@@ -4,7 +4,7 @@ public class Adaline {
 
 	private double [] weight;
 
-	private double bias;
+	private double weightBias;
 
 	public Adaline(int numberIn) {
 		this.weight = new double[numberIn];
@@ -15,7 +15,7 @@ public class Adaline {
 		for (int i = 0; i < input.length; i++) {
 			v += weight[i] * input[i];
 		}
-		v += bias;
+		v += weightBias;
 		return v;
 	}
 
@@ -31,7 +31,7 @@ public class Adaline {
 			for (int i = 0; i < weight.length; i++) {
 				weight[i] = weight[i] + e * rate * input[i];
 			}
-			bias = bias + e * rate;
+			weightBias = weightBias + e * rate;
 		}
 		return e;
 	}
@@ -41,10 +41,10 @@ public class Adaline {
 	}
 
 	public double getBias() {
-		return bias;
+		return weightBias;
 	}
 
 	public void setBias(double bias) {
-		this.bias = bias;
+		this.weightBias = bias;
 	}
 }
